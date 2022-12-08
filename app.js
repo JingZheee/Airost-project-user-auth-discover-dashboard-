@@ -58,16 +58,24 @@ app.get('/dashboard', requireAuth, (req, res, next) => {
 
 //share to find friends get 
 app.get('/createGame/:id', (req, res, next) => {
-    res.render('createGames', {courtId: req.params.id});
+    
+    const courtId= req.params.id;
+    Court.findOne({_id: ObjectId(courtId)}, (err, data) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(data);
+            res.render('createGames', {courtId: req.params.id, data: data});
+        }
+    })
 })
 //share to findn friends post save to database
 app.post('/createGame/:id', requireAuth, (req, res, next) => {
     //user id
     const id = req.decodedToken.id;
     //courts id
-    const courtId= req.body.id;
+    const courtId = req.body.id;
     let result = courtId.trim();
-    console.log(result);
     //find the court and user so that we can use the data in them and pass it to the share game db 
     Court.findOne({_id: ObjectId(result)}, (err,docs) => {
         if(err){
@@ -84,13 +92,15 @@ app.post('/createGame/:id', requireAuth, (req, res, next) => {
                         description: req.body.description,
                         sport: docs.sport,
                         date: docs.date,
-                        timeStart: req.body.timeStart,
+                        timeStart: docs.timestart,
                         timeEnd: req.body.timeEnd,
                         venue: docs.venue,
                         court: docs.court,
                         currentPlayer: req.body.currentPlayer,
                         playerMax: req.body.playerMax,
                         courtId: result,
+                        price: req.body.price,
+                        paymentMethod: req.body.paymentMethod,
                         playerIdJoin: []
                     })
                     newGame.save();
@@ -106,9 +116,7 @@ app.post('/createGame/:id', requireAuth, (req, res, next) => {
         (err, docs) => {
             if(err){
                 console.log(err);
-            } else {
-                console.log(docs);
-            }
+            } 
 
     })
 })
@@ -206,23 +214,34 @@ app.post('/court', requireAuth, (req, res, next) => {
     res.redirect('/');
 })
 
-app.get('/detail/:id', (req, res, next) => {
+// app.get('/detail/:id', (req, res, next) => {
+//     const courtId= req.params.id;
+//     Game.findOne({courtId: courtId}, (err, data) => {
+//         if(err) {
+//             console.log(err);
+//         } else {
+//             console.log(data.court);
+//             Join.find({oriId: data.court}, (err, user) => {
+//                 if (err) {
+//                     console.log(err);
+//                 } else {
+//                     res.render('detail', {data: data, user: user});
+//                 }
+//             }
+//         )}
+//     })
+    
+//})
+
+app.get('/info/:id', (req, res, next) => {
     const courtId= req.params.id;
-    console.log(courtId);
-    Game.findOne({courtId: courtId}, (err, data) => {
-        if(err) {
+    const result = courtId.trim();
+    Game.findOne({_id: ObjectId(result)}, (err,docs) => {
+        if(err){
             console.log(err);
         } else {
-            Join.find({oriId: data._id}, (err, data) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(data);
-                    res.render('detail');
-                }
-            }
-        )}
+            res.render('info', {data: docs, id: req.params.id})
+        }
     })
-    
 })
 app.listen(3000);

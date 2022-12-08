@@ -1,12 +1,241 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- title -->
+    <title>Playlah</title>
+
+    <!-- NavBar -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <script src="https://kit.fontawesome.com/1fb4a11a0f.js" crossorigin="anonymous"></script>
+
+    <!-- Link -->
+    <link rel="stylesheet" href="/info.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+
+
+     <!-- Font link -->
+     <script src="https://kit.fontawesome.com/132be6e6e6.js" crossorigin="anonymous"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Alexandria&display=swap" rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap'); </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+     <style> @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap'); </style>
 </head>
 <body>
-    <h1>Hi</h1>
+    <!-- Header -->
+    <header id="home-page">
+        <a href="#" class = "logo">CROC</a>
+        <div class="rightSide">
+
+          
+
+          <!-- audio -->
+          <audio id="audio" src="music.mp3" autoplay loop type ="audio/mpeg" >
+          </audio>
+          <div class="btns musicPlay">
+            <span id="playPauseBTN"  onclick="playPause()"><i class="fa-solid fa-headphones"></i></span>
+          </div>
+
+          <!-- dark-mode -->
+          <div class="btns dayNight">
+            <i class="fa-solid fa-moon"></i>
+            <i class="fa-solid fa-sun"></i>
+          </div>
+
+          <!-- user -->
+          <div class="btns">
+            <a href="#">
+              <i class="fa-solid fa-circle-user"></i>
+            </a>
+          </div>
+
+          <!-- slidebar -->
+          <div class="btns menuToggle">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          
+        </div>
+    </header>
+
+    
+    <!-- Navigation -->
+    <div class="navigation">
+      <ul>
+        <li class="list active">
+          <a href="#home-page">
+            <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
+            <span class="nav-title">Home</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#book-page">
+            <span class="nav-icon"><i class="fa-solid fa-bookmark"></i></span>
+            <span class="nav-title">Book</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#discover-page">
+            <span class="nav-icon"><i class="fa-solid fa-earth-americas"></i></span>
+            <span class="nav-title">Discover</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#category-page">
+            <span class="nav-icon"><i class="fa-solid fa-basketball"></i></span>
+            <span class="nav-title">Category</span>
+          </a>
+        </li>
+
+        <li class="list">
+          <a href="#upcomming-page">
+            <span class="nav-icon"><i class="fa-solid fa-calendar-days"></i></span>
+            <span class="nav-title">Upcomming</span>
+          </a>
+        </li>
+        <div class="indicator"></div>
+      </ul>
+    </div>  
+
+    <!-- Info-page -->
+
+     
+    <div id="dc-info-page" class="dc-info-body">
+      
+            <div class="dc-info-container">
+              <!-- column -->
+              <div class="dc-info-form">
+                
+                <!-- category1 -->
+                <div class="dc-info-card">
+                  <h2 class="dc-info-text">Info</h2>
+                      <div class="jf-line">
+                        <div class="jf-line1"></div>
+                        <div class="jf-icon"><i class="fa-solid fa-circle-info"></i></div>
+                        <div class="jf-line2"></div>
+                      </div>
+                      <% if (data.toObject().sport == 'badminton') { %>
+                        <% var image = "/image/badminton.jpeg"; %> 
+                    <% } else  { %>
+                        <% var image = "/image/basketball.jpeg"; %>
+                    <% } %>
+
+                      <div class="imgBox">
+                        <div class="dc-text">
+                            <%= data.toObject().sport %>
+                        </div>
+                        <img src="<%= image %> " class="cover">
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                          <div class="dc-info">
+                            <h2><%= data.toObject().eventName %></h2>
+                            <p style="font-size:12px;"><%= data.toObject().description %></p>
+                          </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-calendar-days"></i>
+                          <div class="dc-info">
+                            <h2><%= data.toObject().date %></h2>
+                            <p style="font-size:12px;"><%= data.toObject().timeStart %>00 - <%= data.toObject().timeEnd %>00</p>
+                          </div>
+                      </div>
+    
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="dc-info">
+                          <h2><%= data.toObject().venue %></h2>
+                          <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                        </div>
+                      </div>  
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <div class="dc-info">
+                          <h2>Court</h2>
+                          <p style="font-size:12px;"><%= data.toObject().court %></p>
+                        </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="dc-info">
+                          <h2>Phone</h2>
+                          <p style="font-size:12px;">+6012-3456789</p>
+                        </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-tags"></i>
+                        <div class="dc-info">
+                          <h2>Pricing</h2>
+                          <p style="font-size:12px;"><%= data.toObject().price %></p>
+                        </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-users" style="font-size:30px;"></i>
+                          <div class="dc-info">
+                            <h2>Players</h2>
+                            <p style="font-size:12px;"><%= data.toObject().currentPlayer %> / <%= data.toObject().playerMax %></p>
+                          </div>
+                      </div>
+
+                    
+                </div>
+    
+        </div>
+      </div>
+    </div>
+    
+    <!--Dark mode-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+      let dayNight = document.querySelector('.dayNight')
+      let menuToggle = document.querySelector('.menuToggle')
+      let body = document.querySelector('body')
+      let navigation = document.querySelector('.navigation')
+      
+      dayNight.onclick = function(){
+        body.classList.toggle('dark')
+        dayNight.classList.toggle('active')
+      }
+
+      menuToggle.onclick = function(){
+        menuToggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+      }
+
+      var audio = document.getElementById('audio');
+      var playPauseBTN = document.getElementById('playPauseBTN');
+      var count = 0;
+      document.getElementById("audio").volume = 0.1;
+      function playPause(){
+        
+        if(count == 0){
+          count=1;
+          audio.play();
+          playPauseBTN.innerHTML = '<i class="fa-solid fa-headphones"></i>';
+        }
+        else{
+          count = 0;
+          audio.pause();
+          playPauseBTN.innerHTML = '<i class="fa-solid fa-bell-slash"></i>';
+        }
+      }
+    </script>
 </body>
 </html>

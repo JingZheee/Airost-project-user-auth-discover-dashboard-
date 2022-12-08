@@ -9,11 +9,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <link rel="stylesheet" href="/create.css">
     <script src="https://kit.fontawesome.com/1fb4a11a0f.js" crossorigin="anonymous"></script>
 
     <!-- Link -->
-    
+    <link rel="stylesheet" href="/info.css">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
@@ -107,78 +106,101 @@
       </ul>
     </div>  
 
-    <!-- Category-page -->
-    <form method="post" action="/createGame/:id">
-      <div id="join-form-page" class="jf-body">
-        
-              <div class="jf-container">
-                <!-- column -->
-                <div class="join-form">
-                  
-                  <!-- category1 -->
-                  <div class="jf-card">
-                    <h2>create</h2>
-                        <div class="jf-line">
-                          <div class="jf-line1"></div>
-                          <div class="jf-icon"><i class="fa-solid fa-globe"></i></div>
-                          <div class="jf-line2"></div>
-                        </div>
+    <!-- Info-page -->
 
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Event Name</label>
-                          <input class="jf-input" type="text" name="eventName">
-                      </div>
-
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Time Start</label>
-                          <select class="select">
-                            <option value="0"><%= data.toObject().timestart %> </option>
-                          </select>
-                      </div>
-
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Time End</label>
-                          <input class="jf-input" type="text" name="timeEnd">
-                      </div>
-
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Maximum numbers of player to join</label>
-                          <input class="jf-input" type="text" name="playerMax">
-                      </div>
-
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Number of current player</label>
-                          <input class="jf-input" type="text" name="currentPlayer">
-
-                      </div>
-
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Description</label>
-                          <input class="jf-desc" type="text" name="description">
-                      </div>
-
-
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Payment Method</label>
-                          <input class="jf-input" type="text" name="paymentMethod">
-                      </div>
-
-
-                        <div class="jf-detail">
-                          <label class="form-label" style="font-weight: 500;">Price</label>
-                          <input class="jf-input" type="text" name="price">
-                      </div>
-
-                        <input type="hidden" name="id" value= <%= courtId %> >
-                        <button type="submit" ><i class="fa-solid fa-right-long" id="next-btn"></i></button>
-                      
-
-                  </div>
+     
+    <div id="dc-info-page" class="dc-info-body">
       
-          </div>
+            <div class="dc-info-container">
+              <!-- column -->
+              <div class="dc-info-form">
+                
+                <!-- category1 -->
+                <div class="dc-info-card">
+                  <h2 class="dc-info-text">Info</h2>
+                      <div class="jf-line">
+                        <div class="jf-line1"></div>
+                        <div class="jf-icon"><i class="fa-solid fa-circle-info"></i></div>
+                        <div class="jf-line2"></div>
+                      </div>
+                      <% if (data.toObject().sport == 'badminton') { %>
+                        <% var image = "/image/badminton.jpeg"; %> 
+                    <% } else  { %>
+                        <% var image = "/image/basketball.jpeg"; %>
+                    <% } %>
+
+                      <div class="imgBox">
+                        <div class="dc-text">
+                            <%= data.toObject().sport %>
+                        </div>
+                        <img src="<%= image %> " class="cover">
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                          <div class="dc-info">
+                            <h2><%= data.toObject().eventName %></h2>
+                            <p style="font-size:12px;"><%= data.toObject().description %></p>
+                          </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-calendar-days"></i>
+                          <div class="dc-info">
+                            <h2><%= data.toObject().date %></h2>
+                            <p style="font-size:12px;"><%= data.toObject().timeStart %>00 - <%= data.toObject().timeEnd %>00</p>
+                          </div>
+                      </div>
+    
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="dc-info">
+                          <h2><%= data.toObject().venue %></h2>
+                          <p style="font-size:12px;">Skudai, 80990 Johor Bahru, Johor</p>
+                        </div>
+                      </div>  
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <div class="dc-info">
+                          <h2>Court</h2>
+                          <p style="font-size:12px;"><%= data.toObject().court %></p>
+                        </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="dc-info">
+                          <h2>Phone</h2>
+                          <p style="font-size:12px;">+6012-3456789</p>
+                        </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-tags"></i>
+                        <div class="dc-info">
+                          <h2>Pricing</h2>
+                          <p style="font-size:12px;"><%= data.toObject().price %></p>
+                        </div>
+                      </div>
+
+                      <div class="dc-info-box">
+                        <i class="fa-solid fa-users" style="font-size:30px;"></i>
+                          <div class="dc-info">
+                            <h2>Players</h2>
+                            <p style="font-size:12px;"><%= data.toObject().currentPlayer %> / <%= data.toObject().playerMax %></p>
+                          </div>
+                      </div>
+
+                    <a href="/join/<%= id %> ">
+                      <i class="fa-solid fa-right-long" id="next-btn"></i>
+                    </a>
+
+                </div>
+    
         </div>
       </div>
-    </form>
+    </div>
     
     <!--Dark mode-->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -219,29 +241,3 @@
     </script>
 </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <form method="post" action="/createGame/:id" >
-    <label for="fname">Event Name</label><br>
-        <input type="text" id="fname" name="eventName"><br>
-        <label for="lname">Time Start</label><br>
-        <input type="text" id="lname" name="timeStart">
-        <label for="lname">Time End</label><br>
-        <input type="text" id="lname" name="timeEnd">
-        <label for="lname">Maximum numbers of player to join</label><br>
-        <input type="text" id="lname" name="playerMax">
-        <label for="lname">Number of current players</label><br>
-        <input type="text" id="lname" name="currentPlayer">
-    <input type="hidden" name="id" value= >
-    <input type="submit" value="Join" id="btn">
-</form> 
-</body>
-</html> -->
