@@ -76,7 +76,7 @@
                 <% var date = (game.toObject().date) %> 
                 <% var newDate =  new Date(date)%> 
                 <% var array = game.toObject().playerIdJoin %>
-        <% if (array.includes(userId.toString()) && game.toObject().currentPlayer != game.toObject().playerMax) {%> 
+        <% if ((array.includes(userId.toString()) || ((userId.toString()) == game.toObject().ownerId)) && game.toObject().currentPlayer != game.toObject().playerMax  )  {%> 
           <% var button = 'JOINED' %> 
           <% var href = '' %> 
         <% } else if ( game.toObject().currentPlayer == game.toObject().playerMax) {%> 

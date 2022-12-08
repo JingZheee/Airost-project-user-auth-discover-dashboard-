@@ -63,8 +63,8 @@
       <!-- leftside -->
         <div class="boardleft">
           <h2>Upcomming</h2>
-          <button class="book">Court</button>
-          <button class="book">Games</button>
+          <a href="/dashboard"><button class="book">Court</button></a>
+          <a href="/game"><button class="book">Games</button></a>
         </div>
 
         <!-- line -->
@@ -89,6 +89,15 @@
                     <% } %> 
 
                     <% var id = court.toObject()._id %> 
+
+                    <% if (court.toObject().share == true) { %>
+                      <% var href = "/detail/" + id %> 
+                  <% } else  { %>
+                      <% var href = '/createGame/' + id%>
+                  <% } %> 
+
+
+                    
                     
                     <div class="court1">
 
@@ -146,7 +155,7 @@
                                 </div>
                           </div>
                           <div class="share">
-                            <a href="/createGame/<%= id %> "><button type="submit" class="share-btn"><i class="fa-solid fa-share"></i></button></a>
+                            <a href="<%= href %> "><button type="submit" class="share-btn"><i class="fa-solid fa-share"></i></button></a>
                           </div>
                   </div>
                 <% }) %> 
