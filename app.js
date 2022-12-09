@@ -214,24 +214,25 @@ app.post('/court', requireAuth, (req, res, next) => {
     res.redirect('/');
 })
 
-// app.get('/detail/:id', (req, res, next) => {
-//     const courtId= req.params.id;
-//     Game.findOne({courtId: courtId}, (err, data) => {
-//         if(err) {
-//             console.log(err);
-//         } else {
-//             console.log(data.court);
-//             Join.find({oriId: data.court}, (err, user) => {
-//                 if (err) {
-//                     console.log(err);
-//                 } else {
-//                     res.render('detail', {data: data, user: user});
-//                 }
-//             }
-//         )}
-//     })
+app.get('/detail/:id', (req, res, next) => {
+    const courtId= req.params.id;
+    Game.findOne({courtId: courtId}, (err, data) => {
+        if(err) {
+            console.log(err);
+        } else {
+            Join.find({oriId: data._id}, (err, user) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(user);
+                    res.render('detail', {data: data, users: user});
+                }
+            }
+        )}
+    })
     
-//})
+})
+
 
 app.get('/info/:id', (req, res, next) => {
     const courtId= req.params.id;
@@ -240,8 +241,9 @@ app.get('/info/:id', (req, res, next) => {
         if(err){
             console.log(err);
         } else {
-            res.render('info', {data: docs, id: req.params.id})
+            res.render('info', {data: docs, id: result})
         }
     })
 })
+
 app.listen(3000);

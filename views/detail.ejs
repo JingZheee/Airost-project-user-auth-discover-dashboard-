@@ -37,11 +37,7 @@
           
 
           <!-- audio -->
-          <audio id="audio" src="music.mp3" autoplay loop type ="audio/mpeg" >
-          </audio>
-          <div class="btns musicPlay">
-            <span id="playPauseBTN"  onclick="playPause()"><i class="fa-solid fa-headphones"></i></span>
-          </div>
+
 
           <!-- dark-mode -->
           <div class="btns dayNight">
@@ -192,6 +188,22 @@
                             <p style="font-size:12px;"><%= data.toObject().currentPlayer %> / <%= data.toObject().playerMax %></p>
                           </div>
                       </div>
+
+                      
+                          <div class="dc-info-box">
+                            <i class="fa-solid fa-users" style="font-size:30px;"></i>
+                              <div class="dc-info">
+                                <h2>Players Joined</h2>
+                                <% if (users.length>0) { %>
+                                  <% users.forEach(user => { %>
+                                    <p style="font-size:12px;"><%= user.toObject().joinName %> / <%= user.toObject().joinContact %></p>
+                                <% }) %>
+                                <% } else {%>
+                                    <p>There are no players join yet</p>
+                                <% } %>
+                              </div>
+                          </div>
+                        
 
                     
                 </div>
